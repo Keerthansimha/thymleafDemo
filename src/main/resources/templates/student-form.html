@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form</title>
+</head>
+<body>
+  <h1> Student registration Form</h1>
+  <form th:action="@{/processStudentForm}" th:object="${student}" method="post">
+    First Name : <input type="text" th:field="*{firstName}" />
+    <br><br>
+    Last Name : <input type="text" th:field="*{lastName}" />
+    <br><br>
+    Country : <select th:field = "*{country}" >
+              <!--th:each is like a loop , below code iterates through the list and adds its field and values-->
+                  <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}"></option>
+              </select>
+    <br><br>
+<!--    Fav Programming Language : <input type="radio" th:field="*{favProgLang}" th:value="Go">Go</input>-->
+<!--                                <input type="radio" th:field="*{favProgLang}" th:value="Java">Java</input>-->
+<!--                                <input type="radio" th:field="*{favProgLang}" th:value="Python">Python</input>-->
+<!--                                <input type="radio" th:field="*{favProgLang}" th:value="'c#'">c#</input>-->
+    Fav Programming Lnaguage : <input type="radio" th:field="*{favProgLang}" th:each="tempLang : ${favProgLang}"
+                                        th:value="${tempLang}" th:text="${tempLang}"></input>
+    <br><br>
+      Known OS : <input type="checkbox" th:field="*{knownOS}" th:each="tempOS : ${knownOS}"
+                        th:value="${tempOS}" th:text="${tempOS}"/>
+<!--      <input type="checkbox" th:field="*{knownOS}" th:value="'Microsoft Windows'">Windows</input>-->
+<!--      <input type="checkbox" th:field="*{knownOS}" th:value="MacOS">Mac OS</input>-->
+<!--      <input type="checkbox" th:field="*{knownOS}" th:value="'Kali Linux'">Kali Linux</input>-->
+      <br><br>
+    Submit : <input type="submit" value="submit" />
+
+  </form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Page</title>
+</head>
+<body>
+<h1> Student Registration </h1>
+The Student is confirmed:
+<span th:text="|Student Name: ${student.firstName} ${student.lastName} is from ${student.country} and their favorite
+                programming language is: ${student.favProgLang} and the known OS are : |"></span>
+<ul>
+    <li th:each="tempOS : ${student.knownOS}" th:text="${tempOS}"></li>
+</ul>
+</body>
+</html>
