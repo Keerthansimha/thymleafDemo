@@ -1,17 +1,8 @@
-FROM amazonlinux:2023
+# Use JDK 24 as the base image
+FROM openjdk:24-jdk
 
-# Install dependencies
-RUN yum install -y tar gzip
-
-# Add JDK 24
-COPY /home/ubuntu/jdk-24_linux-x64_bin.tar.gz /tmp/
-RUN mkdir -p /opt/jdk && \
-    tar -xzf /tmp/jdk-24_linux-x64_bin.tar.gz -C /opt/jdk && \
-    rm /tmp/jdk-24_linux-x64_bin.tar.gz
-
-# Set JAVA_HOME and PATH
-ENV JAVA_HOME=/opt/jdk/jdk-24
-ENV PATH="$JAVA_HOME/bin:$PATH"
+# Set working directory
+WORKDIR /app
 
 # Add Spring Boot app
 COPY target/thymleafDemo-0.0.1-SNAPSHOT.jar /app.jar
