@@ -48,7 +48,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'Docker-pass', variable: 'Docker')]) {
                         sh 'docker login -u keerthan66 -p ${Docker}'                  
                     }
-                    sh 'docker push keerthan66/thymleafDemo-0.0.1-SNAPSHOT'
+                    sh 'docker push keerthan66/thymleafdemo-0.0.1-snapshot'
                 }
             }
         }
@@ -62,7 +62,7 @@ pipeline {
                     }
                     
                     echo 'Running Docker container...'
-                    sh 'docker run -d --name loki -p 8080:8080 keerthan66/thymleafDemo-0.0.1-SNAPSHOT'
+                    sh 'docker run -d --name loki -p 8080:8080 keerthan66/thymleafdemo-0.0.1-snapshot'
                 }
             }
         } 
