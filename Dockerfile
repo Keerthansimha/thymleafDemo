@@ -4,7 +4,7 @@ FROM amazonlinux:2023
 RUN yum install -y tar gzip
 
 # Add JDK 24
-COPY jdk-24_linux-x64_bin.tar.gz /tmp/
+COPY /home/ubuntu/jdk-24_linux-x64_bin.tar.gz /tmp/
 RUN mkdir -p /opt/jdk && \
     tar -xzf /tmp/jdk-24_linux-x64_bin.tar.gz -C /opt/jdk && \
     rm /tmp/jdk-24_linux-x64_bin.tar.gz
