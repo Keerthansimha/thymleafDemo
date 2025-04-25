@@ -36,6 +36,36 @@ pipeline {
                 }
             }
         }
+
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh 'docker build -t keerthan66/thymleafDemo-0.0.1-SNAPSHOT .'
+
+                    // Push the Docker image
+                    withCredentials([string(credentialsId: 'Docker-pass', variable: 'Docker')]) {
+                        sh 'docker login -u keerthan66 -p ${Docker}'                  
+                    }
+                    sh 'docker push keerthan66/thymleafDemo-0.0.1-SNAPSHOT'
+                }
+            }
+        }
+
+        stage('Docker Deploy to Container') {
+            steps {
+                script {
+                    echo 'Logging in to Docker Hub...'
+                    withCredentials([string(credentialsId: 'Docker-pass', variable: 'DOCKER_PASS')]) {
+                        sh 'echo ${DOCKER_PASS} | docker login -u keerthan66 --password-stdin'
+                    }
+                    
+                    echo 'Running Docker container...'
+                    sh 'docker run -d --name loki -p 8080:8080 keerthan66/thymleafDemo-0.0.1-SNAPSHOT'
+                }
+            }
+        } 
     }
     
     post {
