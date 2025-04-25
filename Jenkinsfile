@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh 'docker build -t keerthan66/thymleafdemo:0.0.1-snapshot.'
+                    sh 'docker build -t keerthan66/thymleafdemo-0.0.1-snapshot .'
 
                     // Push the Docker image
                     withCredentials([string(credentialsId: 'Docker-pass', variable: 'Docker')]) {
